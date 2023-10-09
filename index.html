@@ -1,0 +1,36 @@
+<html>
+<head>
+   <meta charset="utf-8" />
+   <title>Crescita di un bosco</title>
+</head>
+<body>
+   <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/bert-sans" type="text/css"/> 
+   <style>
+      .box {
+         height:20px;
+         width:20px;
+         background-color:rgb(200, 255, 255);
+      }
+      * {
+         font-family: 'BertSansRegular';
+         font-weight: normal;
+         font-style: normal;
+      } 
+   </style>
+   <h1>
+         Crescita di un bosco
+   </h1>
+   <p>
+      Puoi vedere un bosco crescere sotto ai tuoi occhi.
+   </p>
+   <p>
+      Vedrai aumentare la quantita di legno per ettaro, quando pensi sia troppo clicca per tagliare il legname nella particella desiderata.
+   </p>
+   <div id="year" data-year="1" data-yeld="0"></div>
+   <div id="waiting" style="display: none;"><a href="#">Inizia</a></div>
+   <div id="restart" style="display: none;"><a href="#">Ricomincia</a></div>
+   <div id="start" class="box" style="display:flex;"></div>
+   <script src="node_modules/jquery/dist/jquery.min.js"></script>
+   <script src="js/crescita.js"></script>
+</body>
+</html>
