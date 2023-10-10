@@ -43,7 +43,7 @@ $(function () {
       }
       printYear() {
          let i = $("#year").data("year");
-         for (let p = 0; p < this.ids.length; p++) {
+         for (let p = 1; p < this.ids.length; p++) {
             let el = $("#" + this.ids[p]);
             let year = parseInt(el.data("year"));
             let mass = parseFloat(el.data("mass"));
@@ -57,12 +57,15 @@ $(function () {
          let year = $("#year");
          let i = year.data("year");
          let totalMass = 0;
+         let totalYear = 0;
          for (let p = 0; p < this.ids.length; p++) {
             let el = $("#" + this.ids[p]);
             let mass = parseFloat(el.data("mass"));
+            let y = parseFloat(el.data("year"));
             totalMass += mass; 
+            totalYear += y;
          }
-         year.html("Anno " + i + " - Media massa " + parseInt(totalMass/this.ids.length) + " m³/ha - Massa raccolta "+parseInt(year.data("yeld"))+" m³").data("year",i);
+         year.html("Anno " + i + " - Media massa " + parseInt(totalMass/this.ids.length) + " m³/ha - Età media " + parseInt(totalYear/this.ids.length+1) + " - Massa raccolta "+parseInt(year.data("yeld"))+" m³").data("year",i);
       };
       printEl(el,year,mass1) {
          el.data("year", year);
@@ -83,7 +86,7 @@ $(function () {
             text += "<div style='width:40px;'>";
             for (let y = 0; y < 20; y++) {
                let id = "part-" + x + "-" + y;
-               text += "<div id='" + id + "' data-year='1' data-mass='0' class='box cell'></div>";
+               text += "<div id='" + id + "' data-year='0' data-mass='0' class='box cell'></div>";
                this.ids.push(id);
             }
             text += "</div>"
@@ -103,8 +106,11 @@ $(function () {
       async nextStep() {
          $("#waiting").hide();
          $("#waiting a").text("Prosegui");
+         let year = $("#year");
          for (let i = 0; i < 100; i++) {
             await this.sleep(10);
+            let y = year.data("year");
+            year.data("year",y+1);
             this.printYear();
          }
          $("#waiting").show();
@@ -115,7 +121,7 @@ $(function () {
          yeld += $(el).data("mass");
          $("#year").data("yeld",yeld); 
          let mass1 = 0;
-         let year = $(el).data("year");
+         let year = 0;
          this.printEl(el,year,mass1);
          this.printSummary();
       }
